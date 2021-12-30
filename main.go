@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"github.com/fogleman/gg"
 	"github.com/spf13/viper"
+	"io"
 	"log"
+	"time"
 )
 
 var config Config
@@ -38,17 +40,39 @@ func init() {
 }
 
 func main() {
-	person := Person{
-		Name: "Arya Yunanta",
-		Code: "",
-	}
-	img, err := WriteTextOnImage(person)
+	start := time.Now()
+	fmt.Println("running app...")
+
+	csvReader, err := NewCSVReader()
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	err = gg.SaveJPG(fmt.Sprintf("./out/%s_%s.jpg", person.Name, config.EventName), img, 100)
-	if err != nil {
-		log.Fatalln(err)
+	for {
+		// Read csv records
+		record, err := csvReader.Read()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			log.Fatalln(err)
+		}
+
+		// Generate certificate
+		person := Person{
+			Name: record[0],
+			Code: record[1],
+		}
+		img, err := WriteTextOnImage(person)
+		if err != nil {
+			log.Fatalln(err)
+		}
+
+		err = gg.SaveJPG(fmt.Sprintf("./out/%s_%s.jpg", person.Name, config.EventName), img, 100)
+		if err != nil {
+			log.Fatalln(err)
+		}
 	}
+
+	fmt.Println("done, execution time =", time.Since(start))
 }
