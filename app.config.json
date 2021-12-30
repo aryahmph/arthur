@@ -6,13 +6,15 @@
       "font_path": "./assets/Rubik-Bold.ttf",
       "font_size": 96,
       "position_x": 986,
-      "position_y": 700
+      "position_y": 700,
+      "color_rgb": "0,0,0"
     },
     "code": {
       "font_path": "./assets/Rubik-Medium.ttf",
       "font_size": 28,
       "position_x": 986.4,
-      "position_y": 232
+      "position_y": 232,
+      "color_rgb": "255,100,160"
     }
   }
 }

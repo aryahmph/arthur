@@ -1,5 +1,7 @@
 package main
 
+import "image/color"
+
 type Config struct {
 	EventName      string
 	BackgroundPath string
@@ -12,6 +14,7 @@ type Name struct {
 	FontSize  float64
 	PositionX float64
 	PositionY float64
+	Color     color.RGBA
 }
 
 type Code struct {
@@ -19,6 +22,7 @@ type Code struct {
 	FontSize  float64
 	PositionX float64
 	PositionY float64
+	Color     color.RGBA
 }
 
 type Person struct {

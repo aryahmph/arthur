@@ -4,14 +4,17 @@ import (
 	"fmt"
 	"github.com/fogleman/gg"
 	"github.com/spf13/viper"
+	"image/color"
 	"io"
 	"log"
+	"strings"
 	"time"
 )
 
 var config Config
 
 func init() {
+	// Load config json
 	viper.SetConfigType("json")
 	viper.AddConfigPath(".")
 	viper.SetConfigName("app.config")
@@ -21,6 +24,7 @@ func init() {
 		log.Fatalln(err)
 	}
 
+	// Set config value
 	config = Config{
 		EventName:      viper.GetString("config.event_name"),
 		BackgroundPath: viper.GetString("config.background_img"),
@@ -32,12 +36,31 @@ func init() {
 		},
 	}
 
+	rgbColors := strings.Split(viper.GetString("config.name.color_rgb"), ",")
+
+	config.Name.Color = color.RGBA{
+		R: StringToUint8(rgbColors[0]),
+		G: StringToUint8(rgbColors[1]),
+		B: StringToUint8(rgbColors[2]),
+		A: 255,
+	}
+
+	// Code is optional feature
 	if viper.Get("config.code") != nil {
 		config.Code = Code{
 			FontPath:  viper.GetString("config.code.font_path"),
 			FontSize:  viper.GetFloat64("config.code.font_size"),
 			PositionX: viper.GetFloat64("config.code.position_x"),
 			PositionY: viper.GetFloat64("config.code.position_y"),
+		}
+
+		rgbColors := strings.Split(viper.GetString("config.code.color_rgb"), ",")
+
+		config.Code.Color = color.RGBA{
+			R: StringToUint8(rgbColors[0]),
+			G: StringToUint8(rgbColors[1]),
+			B: StringToUint8(rgbColors[2]),
+			A: 255,
 		}
 	}
 }
