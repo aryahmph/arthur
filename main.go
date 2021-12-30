@@ -30,12 +30,15 @@ func init() {
 			PositionX: viper.GetFloat64("config.name.position_x"),
 			PositionY: viper.GetFloat64("config.name.position_y"),
 		},
-		Code: Code{
+	}
+
+	if viper.Get("config.code") != nil {
+		config.Code = Code{
 			FontPath:  viper.GetString("config.code.font_path"),
 			FontSize:  viper.GetFloat64("config.code.font_size"),
 			PositionX: viper.GetFloat64("config.code.position_x"),
 			PositionY: viper.GetFloat64("config.code.position_y"),
-		},
+		}
 	}
 }
 

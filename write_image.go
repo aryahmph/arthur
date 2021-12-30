@@ -35,5 +35,22 @@ func WriteTextOnImage(person Person) (image.Image, error) {
 	canvas.DrawStringWrapped(person.Name, config.Name.PositionX, config.Name.PositionY, 0.5, 0.5,
 		maxWidth, 1.3, gg.AlignCenter)
 
-	return canvas.Image(), nil
+	// if config for code is set, then write text again
+	if config.Code.FontPath != "" {
+		canvas2 := gg.NewContext(imgWidth, imgHeight)
+		canvas2.DrawImage(canvas.Image(), 0, 0)
+
+		err = canvas2.LoadFontFace(config.Code.FontPath, config.Code.FontSize)
+		if err != nil {
+			return nil, err
+		}
+
+		canvas2.SetColor(color.Black)
+		canvas2.DrawStringWrapped(person.Code, config.Code.PositionX, config.Code.PositionY, 0.5, 0.5,
+			maxWidth, 1.3, gg.AlignCenter)
+
+		return canvas2.Image(), nil
+	} else {
+		return canvas.Image(), nil
+	}
 }

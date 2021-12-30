@@ -9,10 +9,10 @@
       "position_y": 700
     },
     "code": {
-      "font_path": "./assets/Rubik-Bold.ttf",
-      "font_size": 18,
-      "position_x": 155.4,
-      "position_y": 100.4
+      "font_path": "./assets/Rubik-Medium.ttf",
+      "font_size": 28,
+      "position_x": 986.4,
+      "position_y": 232
     }
   }
 }
