@@ -23,7 +23,14 @@ $ cd arthur
 
 ```
 $ ./arthur
+or
+Open arthur.exe
 ```
+
+
+Cara menggunakan dalam Bahasa Indonesia : https://youtu.be/lW4jeQ4MWfw
+
+[![Watch the video](https://img.youtube.com/vi/lW4jeQ4MWfw/maxresdefault.jpg)](https://youtu.be/lW4jeQ4MWfw)
 
 ## Configure the `app.config.json` file
 
